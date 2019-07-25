@@ -32,10 +32,8 @@ int main(int argc,char **argv)
     int                 port=0;
     struct              login_t login;
     struct              mosquitto    *mosq;
-    int                 loop=0;
     pid_t               pid;
     char                mac[ARR_SIZE];
-    char                temp[ARR_SIZE];
     if(opt_init(&port,username,password,temp_topic,warn_topic,address,argc,argv))
     {
         return -1;

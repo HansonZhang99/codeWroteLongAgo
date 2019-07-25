@@ -17,9 +17,12 @@
 
 #include <mosquitto.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "analysis.h"
 #include <string.h>
 #include <stdio.h>
+#include <sqlite3.h>
+#include "insert_db.h"
 #define ARR_SIZE 128
 struct login_t
 {
@@ -30,9 +33,13 @@ struct login_t
     char address[ARR_SIZE];
     int port;
     char mac[ARR_SIZE];
+    sqlite3 *db;
 };
 #define MESSAGE_COUNT 100000L
 #define MESSAGE_SIZE 1024L
+
+#define DB_NAME "PRJ_DATA"
+#define FILE_NAME "JSON_DATA"
 void my_message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message);
 void my_connect_callback(struct mosquitto *mosq, void *obj, int rc);
 void my_disconnect_callback(struct mosquitto *mosq, void *obj, int result);

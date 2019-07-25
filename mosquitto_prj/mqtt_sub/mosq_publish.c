@@ -21,7 +21,7 @@ int mosq_publish(struct mosquitto *mosq,struct login_t *login)
         return -1;
     }
     char arr[MAXSIZE];
-    char send_buf[MAXSIZE];
+    unsigned char send_buf[MAXSIZE];
 
     if(create_json_data(login->mac,"warning",arr,login))
     {

@@ -8,7 +8,7 @@ void signal_action(int signum)
         if(fd<0)
         {
             printf("open %s error\n",BUZZER_PATH);
-            return ;
+            exit(0) ;
         }
         ioctl(fd,OFF,0);
         int e=system("echo 0 > /sys/class/leds/led1/brightness");
@@ -18,7 +18,7 @@ void signal_action(int signum)
         if(e||f||g||h)
         {
             printf("system error\n");
-            return ;
+            exit(0);
         }
     }
     exit(0);

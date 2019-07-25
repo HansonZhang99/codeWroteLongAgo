@@ -22,7 +22,7 @@ int mosq_publish(struct mosquitto *mosq,struct login_t *login)
     }
     char temp[ARR_SIZE];
     char arr[MAXSIZE];
-    char send_buf[MAXSIZE];
+    unsigned char send_buf[MAXSIZE];
     if(get_temperature(temp))
     {
         return -1;  

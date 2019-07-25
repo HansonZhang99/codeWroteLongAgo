@@ -15,13 +15,13 @@
 
 void my_connect_callback(struct mosquitto *mosq, void *obj, int rc)
 {
-                printf("connected\n");
+    printf("connected\n");
 }
 
 
 void my_disconnect_callback(struct mosquitto *mosq, void *obj, int result)
 {
-                printf("disconnect\n");
+    printf("disconnect\n");
 }
 
 
@@ -32,22 +32,24 @@ void my_message_callback(struct mosquitto *mosq, void *userdata, const struct mo
     char *ptr=NULL;
     char temp_t[ARR_SIZE]={0};
     float temp;
-    int i;
     if(message->payloadlen)
     {
-        if(analysis_TLV_msg((char *)(message->payload),message->payloadlen,buf))
+        if(analysis_TLV_msg((unsigned char *)(message->payload),message->payloadlen,buf))
         {
             printf("analysis_TLV_msg error\n");
             return ;
         }
         printf("receive the message from topic [%s] : [\n%s\n] \n",((struct login_t *)userdata)->temp_topic,buf);
+        if(insert_db(((struct login_t *)userdata)->db,DB_NAME,FILE_NAME,buf))
+        {
+            return ;
+        }
         if((str=strstr(buf,((struct login_t *)userdata)->temp_topic))!=NULL)
         {
             str+=(strlen(((struct login_t *)userdata)->temp_topic)+1);
             while(*(++str)!='"');
             ptr=str;
             while(*(++ptr)!='"');
-
             if(((ptr-str)/sizeof(char))>=ARR_SIZE)
                 return ;
             memcpy(temp_t,str+1,(ptr-str)/sizeof(char)-1);

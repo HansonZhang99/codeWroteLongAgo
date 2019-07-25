@@ -125,4 +125,5 @@ int create_TLV_msg(unsigned char buf[],int buf_len,int Tag,void *value,int num)
         memcpy(buf+num,&crc_n,sizeof(unsigned short));//C
         return num+=2;
     }
+    return num;
 }

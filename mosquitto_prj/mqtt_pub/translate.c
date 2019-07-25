@@ -20,7 +20,7 @@ int translate(int fd)
     unsigned char buf[MAXSIZE*4]={'\0'};
     int rv=0;
     int i;
-    char value_s[MAXSIZE*4]={'\0'};
+    unsigned char value_s[MAXSIZE*4]={'\0'};
     int value_i=0;
     double value_d=0.00;
     unsigned short length=0;

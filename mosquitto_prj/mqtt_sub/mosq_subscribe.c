@@ -19,7 +19,7 @@ int mosq_subscribe(struct mosquitto *mosq,struct login_t *login)
 {
     if(mosquitto_subscribe(mosq,NULL,login->temp_topic,0))
     {
-        printf("mosquitto_subscribe error\n",strerror(errno));
+        printf("mosquitto_subscribe error:%s\n",strerror(errno));
         return -1;
     }
     printf("subscribe topic %s successfully\n",login->temp_topic);

@@ -42,6 +42,7 @@ int opt_init(int *port,char username[],char password[],char temp_topic[],char wa
                     printf("daemon error\n");
                     return -1;
                 }
+                break;
             case 'p':
                 *port=atoi(optarg);
                 break;

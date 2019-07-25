@@ -13,12 +13,16 @@
 
 #include "opt_init.h"
 #include "login.h"
+#include "get_mac_address.h"
+#include "mosq_subscribe.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <mosquitto.h>
 #include "analysis.h"
 #include <string.h>
 #include <errno.h>
+#include "db_init.h"
+
 int main(int argc ,char **argv)
 {
     char                username[ARR_SIZE]={0};
@@ -29,9 +33,7 @@ int main(int argc ,char **argv)
     int                 port=0;
     struct              login_t login;
     struct              mosquitto    *mosq;
-    int                 loop=0;
     char                mac[ARR_SIZE];
-    char                temp[ARR_SIZE];
     if(opt_init(&port,username,password,temp_topic,warn_topic,address,argc,argv))
     {
         return -1;
@@ -49,7 +51,14 @@ int main(int argc ,char **argv)
         return -1;
     }
     strncpy(login.mac,mac,ARR_SIZE);
-
+    if(db_init(DB_NAME,FILE_NAME))
+    {
+        return -1;
+    }
+    if((login.db=open_db(DB_NAME,FILE_NAME))==NULL)
+    {
+        return -1;
+    }
     mosq=login_mqtt(&login);
     if(!mosq)
     {
@@ -61,6 +70,7 @@ int main(int argc ,char **argv)
     {
         printf("mosq_subscribe failure:%s \n",strerror(errno));
     }
+    sqlite3_close(login.db);
     mosquitto_destroy(mosq);
     mosquitto_lib_cleanup();
     return 0;

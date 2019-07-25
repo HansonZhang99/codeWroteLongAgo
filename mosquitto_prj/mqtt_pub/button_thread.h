@@ -28,6 +28,7 @@
 #include <arpa/inet.h>
 #include "crc-itu-t.h"
 #include "packet.h"
+#include "mosq_publish.h"
 #include "analysis.h"
 #include "login.h"
 #define EV_PRESS 1

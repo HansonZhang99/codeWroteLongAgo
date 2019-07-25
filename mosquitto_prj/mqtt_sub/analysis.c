@@ -49,6 +49,7 @@ int byte_to_int(unsigned char *buf,int cmd)
         val=buf[s];
         return (unsigned char)val;
     }
+    return 0;
 }
 /* buf:the locaton of the data
  * len:the data's length(for byte)
@@ -82,11 +83,9 @@ int analysis_TLV_msg(unsigned char *buf,int rv,char *val_s)
     int i;
     unsigned char *ptr=NULL;
     unsigned short len;
-    unsigned short crc;
     unsigned short crc_n;
     unsigned char tag;
-    int           value,j;
-    unsigned char crc_s[2];
+    int           value;
     unsigned char value_s[1024];
     for(i=0;i<rv;i++)
     {

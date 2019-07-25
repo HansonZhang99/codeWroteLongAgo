@@ -19,6 +19,7 @@
 #include "get_temperature.h"
 #include "crc-itu-t.h"
 #include "packet.h"
+#include "create_json_data.h"
 #include "analysis.h"
 #include "button_thread.h"
 #include <string.h>

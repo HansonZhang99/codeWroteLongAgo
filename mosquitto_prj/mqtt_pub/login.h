@@ -38,7 +38,7 @@ struct login_t
 void my_message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message);
 void my_connect_callback(struct mosquitto *mosq, void *obj, int rc);
 void my_disconnect_callback(struct mosquitto *mosq, void *obj, int result);
-struct mosquitto *login(struct login_t *login);
+struct mosquitto *login_mqtt(struct login_t *login);
 #define KEEPALIVE 60
 #endif
 

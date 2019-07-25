@@ -15,13 +15,13 @@
 
 void my_connect_callback(struct mosquitto *mosq, void *obj, int rc)
 {
-                printf("connected\n");
+    printf("connected\n");
 }
 
 
 void my_disconnect_callback(struct mosquitto *mosq, void *obj, int result)
 {
-                printf("disconnect\n");
+    printf("disconnect\n");
 }
 
 
@@ -32,7 +32,7 @@ void my_message_callback(struct mosquitto *mosq, void *userdata, const struct mo
     pthread_attr_t attr1,attr2;
     if(message->payloadlen)
     {
-        if(analysis_TLV_msg((char *)(message->payload),message->payloadlen,buf))
+        if(analysis_TLV_msg((unsigned char *)(message->payload),message->payloadlen,buf))
         {
             printf("analysis_TLV_msg error\n");
             return ;

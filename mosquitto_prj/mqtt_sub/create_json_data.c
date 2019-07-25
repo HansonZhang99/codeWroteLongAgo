@@ -20,9 +20,12 @@ int create_json_data(char *mac,char *temp,char arr[],struct login_t *login)
         printf("Invalid argument mac or temp or arr\n");
         return -1;
     }
+    char tim[MAXSIZE];
+    get_time(tim);
     cJSON * root =  cJSON_CreateObject();
     cJSON * item =  cJSON_CreateObject();
     cJSON_AddItemToObject(root,"mac address",cJSON_CreateString(mac));
+    cJSON_AddItemToObject(root,"time",cJSON_CreateString(tim));
     cJSON_AddItemToObject(root,"topic",item);
     cJSON_AddItemToObject(item,login->warn_topic,cJSON_CreateString(temp));
     strncpy(arr,cJSON_Print(root),MAXSIZE);
