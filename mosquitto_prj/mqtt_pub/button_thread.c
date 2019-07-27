@@ -49,7 +49,7 @@ int button_thread(struct mosquitto *mosq,struct login_t *login)
 {
     pthread_t tid;
     pthread_attr_t attr;
-    struct message_a msg;
+    static struct message_a msg;
     msg.mosq=mosq;
     msg.login=login;
 

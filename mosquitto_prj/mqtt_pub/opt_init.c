@@ -37,7 +37,7 @@ int opt_init(int *port,char username[],char password[],char temp_topic[],char wa
         switch(rv)
         {
             case 'd':
-                if(daemon(0,1)<0)
+                if(daemon(0,0)<0)
                 {
                     printf("daemon error\n");
                     return -1;
