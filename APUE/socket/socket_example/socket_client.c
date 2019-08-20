@@ -23,6 +23,11 @@
 
 int main(int argc, char **argv)
 {
+    if(argc!=3)
+    {
+        printf("usage: ./a.out [port] [ipaddress]\n");
+        return -1;
+    }
     struct sockaddr_in              server_addr;
     int                             cli_fd;
     char                            buf[MAXSIZE];

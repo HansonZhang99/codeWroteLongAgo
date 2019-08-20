@@ -30,8 +30,7 @@ void ssl_read_cb(struct bufferevent *bev,void *ctx)
     {
         printf("[libevent] read %d bytes data: %s\n",n-1,buf);
     }
-    if(!strcmp(buf,"1")||!strcmp(buf,"2")||!strcmp(buf,"3")||!strcmp(buf,"4")||!strcmp(buf,"5")||!strcmp(buf,"6")||\
-            !strcmp(buf,"0x01")||!strcmp(buf,"0x02")||!strcmp(buf,"0x03")||!strcmp(buf,"0x04")||!strcmp(buf,"0x05")||!strcmp(buf,"0x06"))
+    if(!strcmp(buf,"1")||!strcmp(buf,"2")||!strcmp(buf,"3")||!strcmp(buf,"4")||!strcmp(buf,"5")||!strcmp(buf,"6"))
     {
         int val=atoi(buf);
         printf("%d\n",val);
@@ -143,8 +142,7 @@ int libevent_server(ctx_t* g_ctx)
 
     addr.sin_family=AF_INET;
     addr.sin_port=htons(g_ctx->server_port);
-    //addr.sin_addr.s_addr=inet_addr(g_ctx->server_ip);
-    addr.sin_addr.s_addr=htonl(INADDR_ANY);
+    addr.sin_addr.s_addr=inet_addr(g_ctx->server_ip);
     ctx=evssl_init(g_ctx);
     if(!ctx)
     {
