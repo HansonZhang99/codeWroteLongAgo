@@ -49,7 +49,7 @@ int main(int argc,char *argv[])
         server_addr.sin_family=AF_INET;
         server_addr.sin_port=htons(atoi(argv[1]));
         server_addr.sin_addr.s_addr=htonl(INADDR_ANY);
-        //inet_aton(argv[2],&server_addr.sin_addr);
+
         if(bind(sock_fd,(struct sockaddr *)&server_addr,sizeof(struct sockaddr))<0)
         {
             printf("bind error:%d:%s\n",errno,strerror(errno));
